@@ -20,6 +20,9 @@ export default function ItensMenu({ click }) {
       <TouchableOpacity onPress={() => click('sintomas')} style={styles.button}>
         <Text style={styles.text}>Quais são os sintomas?</Text>
       </TouchableOpacity>
+      <TouchableOpacity onPress={() => click('riscos')} style={styles.button}>
+        <Text style={styles.text}>Quais são os riscos?</Text>
+      </TouchableOpacity>
       <TouchableOpacity onPress={() => click('noticias')} style={styles.button}>
         <Text style={styles.text}>Notícias</Text>
       </TouchableOpacity>

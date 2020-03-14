@@ -9,11 +9,20 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+import {
+  AdMobBanner,
+  AdMobInterstitial,
+  PublisherBanner,
+  AdMobRewarded,
+} from 'react-native-admob'
+
 import ItensMenu from './components/ItensMenu';
 
 import Sobre from './conteudo/sobre';
 import Prevencao from './conteudo/prevencao';
 import Medidas from './conteudo/medidas';
+import Sintomas from './conteudo/sintomas';
+import Riscos from './conteudo/riscos';
 // // import Noticias from './conteudo/noticias';
 
 import ImageMenu from './assets/menu.png';
@@ -35,6 +44,9 @@ const App = () => {
         break;
       case 'sintomas':
         setConteudo(Sintomas);
+        break;
+      case 'riscos':
+        setConteudo(Riscos);
         break;
       // case 'noticias':
       //   setConteudo(Noticias);
@@ -79,6 +91,12 @@ const App = () => {
                 </View>
               ))}
           </ScrollView>
+          <AdMobBanner
+            adSize="fullBanner"
+            adUnitID="ca-app-pub-3816051452703802/5871014175"
+            testDevices={[AdMobBanner.simulatorId]}
+            onAdFailedToLoad={error => console.error(error)}
+          />
         </View>
       )}
 
@@ -177,7 +195,7 @@ const styles = StyleSheet.create({
     width: '100%',
     minHeight: 40,
     paddingHorizontal: 40,
-    paddingVertical: 20,
+    paddingVertical: 10,
   },
   bodyText: {
     textAlign: 'justify',
@@ -203,7 +221,6 @@ const styles = StyleSheet.create({
     padding: 15,
     backgroundColor: '#e9e9e9',
     borderRadius: 10,
-    marginBottom: 20
   }
 });
 
