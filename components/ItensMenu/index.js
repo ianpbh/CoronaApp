@@ -11,6 +11,9 @@ export default function ItensMenu({ click }) {
       <View style={styles.logoMenu}>
         <Image source={ImageLogo} style={styles.logo} />
       </View>
+      <TouchableOpacity onPress={() => click('noticias')} style={styles.button}>
+        <Text style={styles.text}>Mapa em tempo real</Text>
+      </TouchableOpacity>
       <TouchableOpacity onPress={() => click('sobre')} style={styles.button}>
         <Text style={styles.text}>O que é o Corona Virus?</Text>
       </TouchableOpacity>
@@ -22,9 +25,6 @@ export default function ItensMenu({ click }) {
       </TouchableOpacity>
       <TouchableOpacity onPress={() => click('riscos')} style={styles.button}>
         <Text style={styles.text}>Quais são os riscos?</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => click('noticias')} style={styles.button}>
-        <Text style={styles.text}>Notícias</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => click('medidas')} style={styles.button}>
         <Text style={styles.text}>O que fazer em caso de sintomas?</Text>

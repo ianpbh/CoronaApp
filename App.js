@@ -9,6 +9,8 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+import { WebView } from 'react-native-webview';
+
 import {
   AdMobBanner,
   AdMobInterstitial,
@@ -31,9 +33,11 @@ import ImageLogo from './assets/logo.png';
 const App = () => {
   const [conteudo, setConteudo] = useState('');
   const [showMenu, setShowMenu] = useState(true);
+  const [showMapa, setShowMapa] = useState(false);
 
   const setContent = item => {
     setShowMenu(false);
+    setShowMapa(false);
 
     switch (item) {
       case 'sobre':
@@ -48,9 +52,9 @@ const App = () => {
       case 'riscos':
         setConteudo(Riscos);
         break;
-      // case 'noticias':
-      //   setConteudo(Noticias);
-      //   break;
+      case 'noticias':
+        setShowMapa(true);
+        break;
       case 'medidas':
         setConteudo(Medidas);
         break;
@@ -63,41 +67,51 @@ const App = () => {
   return (
     <>
       {(showMenu) ? <ItensMenu click={(item) => setContent(item)} /> : (
-        <View style={styles.container}>
-          <View style={styles.menu}>
-            <View style={styles.logoMenu}>
-              <Image source={ImageLogo} style={styles.logo} />
-              <Text style={styles.titleMenu}>Corona Virus</Text>
+  
+          <View style={styles.containerTexto}>
+            <View style={styles.menu}>
+              <View style={styles.logoMenu}>
+                <Image source={ImageLogo} style={styles.logo} />
+                <Text style={styles.titleMenu}>Corona Virus</Text>
+              </View>
+              <TouchableOpacity onPress={() => setShowMenu(true)} style={styles.btnMenu}>
+                <Image style={styles.imgMenu} source={ImageMenu} />
+                <Text style={styles.labelBtnMenu}>Menu</Text>
+              </TouchableOpacity>
             </View>
-            <TouchableOpacity onPress={() => setShowMenu(true)} style={styles.btnMenu}>
-              <Image style={styles.imgMenu} source={ImageMenu} />
-              <Text style={styles.labelBtnMenu}>Menu</Text>
-            </TouchableOpacity>
-          </View>
-          <ScrollView style={styles.content}>
-            <View style={styles.wrapTitleContent}>
-              <Text style={styles.titleContent}>{conteudo.title}</Text>
-            </View>
-            <View style={styles.wrapImageContent}>
-              <Image source={conteudo.image} style={styles.imageContent} />
-            </View>
-            <View style={styles.bodyContent}>
-              <Text style={styles.bodyText}>{conteudo.body}</Text>
-            </View>
-            {(conteudo.steps.length > 0) &&
-              conteudo.steps.map(v => (
-                <View key={v.id} style={styles.bodyContent}>
-                  <Text style={styles.textSteps}>{v.text}</Text>
+
+            {(showMapa) ? (
+
+              <WebView source={{ uri: 'https://bing.com/covid?ref=producthunt' }} style={{ flex: 1 }} />
+            ) 
+            : 
+            (
+              <ScrollView style={styles.content}>
+                <View style={styles.wrapTitleContent}>
+                  <Text style={styles.titleContent}>{conteudo.title}</Text>
                 </View>
-              ))}
-          </ScrollView>
-          <AdMobBanner
-            adSize="fullBanner"
-            adUnitID="ca-app-pub-3816051452703802/5871014175"
-            testDevices={[AdMobBanner.simulatorId]}
-            onAdFailedToLoad={error => console.error(error)}
-          />
-        </View>
+                <View style={styles.wrapImageContent}>
+                  <Image source={conteudo.image} style={styles.imageContent} />
+                </View>
+                <View style={styles.bodyContent}>
+                  <Text style={styles.bodyText}>{conteudo.body}</Text>
+                </View>
+                {(conteudo.steps.length > 0) &&
+                  conteudo.steps.map(v => (
+                    <View key={v.id} style={styles.bodyContent}>
+                      <Text style={styles.textSteps}>{v.text}</Text>
+                    </View>
+                  ))}
+              </ScrollView>
+            )}
+            <AdMobBanner
+              adSize="fullBanner"
+              // adUnitID="ca-app-pub-3816051452703802/5871014175"
+              adUnitID="ca-app-pub-3940256099942544/6300978111"
+              testDevices={[AdMobBanner.simulatorId]}
+              onAdFailedToLoad={error => console.error(error)}
+            />
+          </View>
       )}
 
     </>
@@ -105,10 +119,11 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+
+  containerTexto: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+    // justifyContent: 'flex-start',
+    // alignItems: 'flex-start',
     // backgroundColor: '#197332',
   },
 
