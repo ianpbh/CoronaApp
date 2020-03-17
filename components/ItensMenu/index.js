@@ -11,7 +11,7 @@ export default function ItensMenu({ click }) {
       <View style={styles.logoMenu}>
         <Image source={ImageLogo} style={styles.logo} />
       </View>
-      <TouchableOpacity onPress={() => click('noticias')} style={styles.button}>
+      <TouchableOpacity onPress={() => click('mapa')} style={styles.button}>
         <Text style={styles.text}>Mapa em tempo real</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => click('sobre')} style={styles.button}>

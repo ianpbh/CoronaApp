@@ -52,7 +52,7 @@ const App = () => {
       case 'riscos':
         setConteudo(Riscos);
         break;
-      case 'noticias':
+      case 'mapa':
         setShowMapa(true);
         break;
       case 'medidas':
