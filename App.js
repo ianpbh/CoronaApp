@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
   Text,
@@ -6,7 +6,9 @@ import {
   Image,
   StyleSheet,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  BackHandler,
+  Alert
 } from 'react-native';
 
 import { WebView } from 'react-native-webview';
@@ -34,6 +36,7 @@ const App = () => {
   const [conteudo, setConteudo] = useState('');
   const [showMenu, setShowMenu] = useState(true);
   const [showMapa, setShowMapa] = useState(false);
+
 
   const setContent = item => {
     setShowMenu(false);
@@ -70,18 +73,18 @@ const App = () => {
   
           <View style={styles.containerTexto}>
             <View style={styles.menu}>
-              <View style={styles.logoMenu}>
-                <Image source={ImageLogo} style={styles.logo} />
-                <Text style={styles.titleMenu}>Corona Virus</Text>
-              </View>
               <TouchableOpacity onPress={() => setShowMenu(true)} style={styles.btnMenu}>
                 <Image style={styles.imgMenu} source={ImageMenu} />
                 <Text style={styles.labelBtnMenu}>Menu</Text>
               </TouchableOpacity>
+              <View style={styles.logoMenu}>
+                <Image source={ImageLogo} style={styles.logo} />
+                <Text style={styles.titleMenu}>Corona Virus</Text>
+              </View>
             </View>
 
-            {(showMapa) ? (
-
+            {(showMapa) ? 
+            (
               <WebView source={{ uri: 'https://bing.com/covid?ref=producthunt' }} style={{ flex: 1 }} />
             ) 
             : 
@@ -106,8 +109,8 @@ const App = () => {
             )}
             <AdMobBanner
               adSize="fullBanner"
-              // adUnitID="ca-app-pub-3816051452703802/5871014175"
-              adUnitID="ca-app-pub-3940256099942544/6300978111"
+              // adUnitID="ca-app-pub-3816051452703802/5871014175" // Esse é o id do Banner real
+              adUnitID="ca-app-pub-3940256099942544/6300978111" // Esse é o id do banner de teste da google
               testDevices={[AdMobBanner.simulatorId]}
               onAdFailedToLoad={error => console.error(error)}
             />
