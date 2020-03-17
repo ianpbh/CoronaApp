@@ -10,6 +10,7 @@ export default function ItensMenu({ click }) {
     <View style={styles.menu}>
       <View style={styles.logoMenu}>
         <Image source={ImageLogo} style={styles.logo} />
+        <Text style={styles.textLogo}>Guia Corona Vírus</Text>
       </View>
       <TouchableOpacity onPress={() => click('mapa')} style={styles.button}>
         <Text style={styles.text}>Mapa em tempo real</Text>
@@ -29,6 +30,9 @@ export default function ItensMenu({ click }) {
       <TouchableOpacity onPress={() => click('medidas')} style={styles.button}>
         <Text style={styles.text}>O que fazer em caso de sintomas?</Text>
       </TouchableOpacity>
+      <TouchableOpacity onPress={() => click('sobreapp')} style={styles.button}>
+        <Text style={styles.text}>Créditos</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -37,21 +41,30 @@ const styles = StyleSheet.create({
   menu: {
     width: '100%',
     flex: 1,
-    backgroundColor: colors.primary,
+    backgroundColor: '#111',
     justifyContent: 'center',
     alignItems: 'center',
   },
   button: {
     width: '80%',
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
     alignItems: 'center',
     paddingVertical: 5,
-    borderRadius: 30,
+    borderRadius: 10,
     marginVertical: 10,
   },
   text: {
     fontSize: 18,
-    color: '#222'
+    color: '#fff'
+  },
+  logoMenu: {
+    alignItems: 'center',
+    marginBottom: 25,
+  },
+  textLogo: {
+    fontSize: 20,
+    color: '#fff',
+    textTransform: 'uppercase'
   },
   logo: {
     marginBottom: 20,

@@ -22,11 +22,12 @@ import {
 
 import ItensMenu from './components/ItensMenu';
 
-import Sobre from './conteudo/sobre';
+import Sobre from './conteudo/sobrecorona';
 import Prevencao from './conteudo/prevencao';
 import Medidas from './conteudo/medidas';
 import Sintomas from './conteudo/sintomas';
 import Riscos from './conteudo/riscos';
+import SobreApp from './conteudo/sobreapp';
 // // import Noticias from './conteudo/noticias';
 
 import ImageMenu from './assets/menu.png';
@@ -61,6 +62,9 @@ const App = () => {
       case 'medidas':
         setConteudo(Medidas);
         break;
+      case 'sobreapp':
+        setConteudo(SobreApp);
+        break;
       default:
         setShowMenu(true);
         break;
@@ -70,32 +74,34 @@ const App = () => {
   return (
     <>
       {(showMenu) ? <ItensMenu click={(item) => setContent(item)} /> : (
-  
-          <View style={styles.containerTexto}>
-            <View style={styles.menu}>
-              <TouchableOpacity onPress={() => setShowMenu(true)} style={styles.btnMenu}>
-                <Image style={styles.imgMenu} source={ImageMenu} />
-                <Text style={styles.labelBtnMenu}>Menu</Text>
-              </TouchableOpacity>
-              <View style={styles.logoMenu}>
-                <Image source={ImageLogo} style={styles.logo} />
-                <Text style={styles.titleMenu}>Corona Virus</Text>
-              </View>
-            </View>
 
-            {(showMapa) ? 
+        <View style={styles.containerTexto}>
+          <View style={styles.menu}>
+            <TouchableOpacity onPress={() => setShowMenu(true)} style={styles.btnMenu}>
+              <Image style={styles.imgMenu} source={ImageMenu} />
+              <Text style={styles.labelBtnMenu}>Menu</Text>
+            </TouchableOpacity>
+            <View style={styles.logoMenu}>
+              <Image source={ImageLogo} style={styles.logo} />
+              <Text style={styles.titleMenu}>Corona Virus</Text>
+            </View>
+          </View>
+
+          {(showMapa) ?
             (
               <WebView source={{ uri: 'https://bing.com/covid?ref=producthunt' }} style={{ flex: 1 }} />
-            ) 
-            : 
+            )
+            :
             (
               <ScrollView style={styles.content}>
                 <View style={styles.wrapTitleContent}>
                   <Text style={styles.titleContent}>{conteudo.title}</Text>
                 </View>
-                <View style={styles.wrapImageContent}>
-                  <Image source={conteudo.image} style={styles.imageContent} />
-                </View>
+                {(conteudo.image) && (
+                  <View style={styles.wrapImageContent}>
+                    <Image source={conteudo.image} style={styles.imageContent} />
+                  </View>
+                )}
                 <View style={styles.bodyContent}>
                   <Text style={styles.bodyText}>{conteudo.body}</Text>
                 </View>
@@ -107,14 +113,14 @@ const App = () => {
                   ))}
               </ScrollView>
             )}
-            <AdMobBanner
-              adSize="fullBanner"
-              // adUnitID="ca-app-pub-3816051452703802/5871014175" // Esse é o id do Banner real
-              adUnitID="ca-app-pub-3940256099942544/6300978111" // Esse é o id do banner de teste da google
-              testDevices={[AdMobBanner.simulatorId]}
-              onAdFailedToLoad={error => console.error(error)}
-            />
-          </View>
+          <AdMobBanner
+            adSize="fullBanner"
+            // adUnitID="ca-app-pub-3816051452703802/5871014175" // Esse é o id do Banner real
+            adUnitID="ca-app-pub-3940256099942544/6300978111" // Esse é o id do banner de teste da google
+            testDevices={[AdMobBanner.simulatorId]}
+            onAdFailedToLoad={error => console.error(error)}
+          />
+        </View>
       )}
 
     </>
@@ -135,7 +141,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 50,
     paddingHorizontal: 10,
-    backgroundColor: '#ff6600',
+    backgroundColor: '#111',
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
@@ -203,7 +209,7 @@ const styles = StyleSheet.create({
     width: '80%',
     height: 'auto',
     paddingVertical: 10,
-    backgroundColor: '#ff6600',
+    backgroundColor: '#111',
     paddingHorizontal: 8,
     borderTopRightRadius: 20,
     borderBottomRightRadius: 20,
